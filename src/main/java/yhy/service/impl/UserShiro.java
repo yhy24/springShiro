@@ -1,23 +1,76 @@
 package yhy.service.impl;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.log4j.Logger;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.Realm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+import yhy.exception.ServiceException;
+import yhy.pojo.User;
+import yhy.service.UserService;
 
-public class UserShiro implements Realm {
+import javax.annotation.Resource;
+
+public class UserShiro extends AuthorizingRealm implements Realm{
+    private static Logger logger = Logger.getLogger(UserShiro.class);
+
+    @Resource
+    UserService userService;
+
     @Override
-    public String getName() {
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         return null;
     }
 
     @Override
-    public boolean supports(AuthenticationToken authenticationToken) {
-        return false;
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken){
+
+        UsernamePasswordToken upToken = (UsernamePasswordToken) authenticationToken;
+        String name= upToken.getUsername();
+        User user = null;
+
+        try {
+            user = loninUser(name);
+        } catch (ServiceException e) {}
+        String pwd = new String(upToken.getPassword());
+        System.out.println("输入的用户名："+name+" 输入的密码:"+pwd+" 数据库的密码:"+user.getPassword());
+
+        if (!pwd.equals(user.getPassword())){
+            return null;
+        }
+        Object principals = upToken.getPrincipal();
+        String realName = getName();
+        ByteSource salt = ByteSource.Util.bytes(name);
+        Object credentials = pwd;
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(principals,credentials,realName);
+        // MD5加密 使用这个 SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(principals,credentials,salt,realName);
+        return info;
     }
 
-    @Override
-    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        return null;
+    private User loninUser(String name) throws ServiceException {
+        /*从数据库中获取用户的信息*/
+        User user= userService.findUserByName(name);
+        if(user == null){
+            throw new ServiceException("9999","该用户不存在的!");
+        }
+        return user;
     }
+
+
+    public static void main(String[] args) {
+        /*测试获取加密后的密码  4a61d6f93e88b44fce4f0993b0a4acd5*/
+        String prc="MD5";
+        Object source = ByteSource.Util.bytes("杨浩营");//盐值为自己的名字
+        String pwd = "123";
+        int times = 1024;
+        Object MD5 = new SimpleHash(prc,pwd,source,times);
+        logger.info("--->"+MD5);
+    }
+
+
+
+
 }

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <h1>测试专用的</h1>
+   <h2>标题:${fM}</h2>
+   <a href="http://localhost:8087/springShiro/login">回到登录页面</a>
 </body>
 </html>
