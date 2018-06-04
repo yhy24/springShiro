@@ -19,6 +19,9 @@ public class ControlllerGood {
             System.out.println("I hate you");
             str = "I hate you";
         }
+        if (str!="I love you") {
+            str = "Please don`t go";
+        }
         return "创造"+str;
     }
 
