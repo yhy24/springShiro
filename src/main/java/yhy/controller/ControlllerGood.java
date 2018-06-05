@@ -25,6 +25,9 @@ public class ControlllerGood {
         if (str.equals("I hate you")) {
             System.out.println("小绵羊");
         }
+        if (!"1".equals("2")) {
+            System.out.println("这只是开始的Start");
+        }
         return "创造"+str;
     }
 
