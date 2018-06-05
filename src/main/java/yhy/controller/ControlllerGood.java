@@ -22,6 +22,9 @@ public class ControlllerGood {
         if (str!="I love you") {
             str = "Please don`t go";
         }
+        if (str.equals("I hate you")) {
+            System.out.println("小绵羊");
+        }
         return "创造"+str;
     }
 
