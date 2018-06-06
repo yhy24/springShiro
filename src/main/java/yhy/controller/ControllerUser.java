@@ -97,10 +97,17 @@ public class ControllerUser {
     @RequestMapping("/oneUser")
     @ResponseBody
     public String fingUserByName() throws ServiceException {
-        String name = "张蕾";
+        String name = "科比";
         User user = userService.findUserByName(name);
         return user.toString();
     }
-
+/*没有实际的意义只是测试代码*/
+    @RequestMapping("/oneUser")
+    @ResponseBody
+    public String fingUserById() throws ServiceException {
+        String id = "24";
+        User user = userService.findUserByName(id);
+        return user.toString();
+    }
 
 }
