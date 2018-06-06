@@ -30,13 +30,10 @@ public class CheckController {
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
             'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
-    /**
-     * 具体获取验证码的方法
-     * @param time  time为时戳,这样的话可以避免浏览器缓存验证码
-     * @throws IOException
-     */
-    @RequestMapping(value = "/code/{time}",method = RequestMethod.GET)
-    public void getCode(@PathVariable("time") String time, HttpServletRequest request,
+ // sn  sn时戳,可以避免浏览器缓存验证码
+
+    @RequestMapping(value = "/rand/{sn}",method = RequestMethod.GET)
+    public void getCode(@PathVariable("sn") String sn, HttpServletRequest request,
                         HttpServletResponse response) throws IOException {
 //定义随机数
         Random r = new Random();
