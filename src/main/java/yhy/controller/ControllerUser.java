@@ -111,6 +111,6 @@ public class ControllerUser {
     }
     String str = "A brand new Day!";
 
-    String str = "门前一条河，河里一群鸭，快来快来数一数，24678";
+    String str1 = "门前一条河，河里一群鸭，快来快来数一数，24678";
 
 }
