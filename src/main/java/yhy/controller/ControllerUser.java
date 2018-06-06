@@ -110,4 +110,6 @@ public class ControllerUser {
         return user.toString();
     }
 
+    String str = "门前一条河，河里一群鸭，快来快来数一数，24678";
+
 }
