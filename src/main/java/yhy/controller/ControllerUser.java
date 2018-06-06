@@ -97,7 +97,7 @@ public class ControllerUser {
     @RequestMapping("/oneUser")
     @ResponseBody
     public String fingUserByName() throws ServiceException {
-        String name = "张蕾";
+        String name = "科比";
         User user = userService.findUserByName(name);
         return user.toString();
     }
@@ -111,5 +111,6 @@ public class ControllerUser {
     }
     String str = "A brand new Day!";
 
+    String str = "门前一条河，河里一群鸭，快来快来数一数，24678";
 
 }
