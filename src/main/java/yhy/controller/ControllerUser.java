@@ -109,8 +109,8 @@ public class ControllerUser {
         User user = userService.findUserByName(id);
         return user.toString();
     }
-    String str = "A brand new Day!";
 
-    String str1 = "门前一条河，河里一群鸭，快来快来数一数，24678";
+    String str = "门前一条河，河里一群鸭，快来快来数一数，24678";
+    String nuc = "a beautiful day";
 
 }
