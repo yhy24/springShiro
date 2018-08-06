@@ -27,4 +27,8 @@
         <aop:pointcut id="txPointcut" expression="execution(* yhy.service..*(..))"/>
         <aop:advisor advice-ref="txadvice" pointcut-ref="txPointcut"/>
     </aop:config>
+
+<!--进行开启事物-->
+    <aop:aspectj-autoproxy/>
+
 </beans>
