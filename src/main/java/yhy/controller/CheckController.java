@@ -17,6 +17,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * 生产随机验证码
+ */
 @Controller
 public class CheckController {
     private static Logger logger = Logger.getLogger(CheckController.class);

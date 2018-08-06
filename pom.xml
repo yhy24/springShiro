@@ -164,6 +164,14 @@
       <version>2.5</version>
       <scope>provided</scope>
     </dependency>
+    <!--spring-aspects-->
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>4.3.9.RELEASE</version>
+    </dependency>
+
 
 
 
