@@ -15,20 +15,29 @@
 
     <!--配置一个指定的事物属性-->
     <tx:advice id="txadvice" transaction-manager="transactionManager">
+        <!--
+            read-only="true" : 当前方法表示只读，不进行更新插入的操作
+            propagation="REQUIRES_NEW":表示当前方法开启一个新的事物，被调用方法的事物进行挂起
+            propagation="REQUIRED"：使用被调用方法的事物
+            isolation="READ_COMMITTED"：事物的隔离级别，常用的:READ_COMMITTED
+            timeOut:在事物回滚之前占用多长的时间
+        -->
         <tx:attributes>
             <tx:method name="get*" read-only="true"/>
             <tx:method name="find*" read-only="true"/>
+            <tx:method name="insert*" propagation="REQUIRES_NEW"/>
+            <tx:method name="select*" propagation="REQUIRED"/>
             <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
 
-    <!--配置切点，让事物属性和切点进行关联-->
+    <!--配置切点，让事物属性和切入点进行关联-->
     <aop:config>
-        <aop:pointcut id="txPointcut" expression="execution(* yhy.service..*(..))"/>
-        <aop:advisor advice-ref="txadvice" pointcut-ref="txPointcut"/>
+        <aop:pointcut id="txPointcut" expression="execution(* yhy.service..*(..))"/><!--切入的方法-->
+        <aop:advisor advice-ref="txadvice" pointcut-ref="txPointcut"/><!--事物的属性和方法的关联-->
     </aop:config>
 
-<!--进行开启事物-->
+<!--进行开启事物 aspectj 动态代理-->
     <aop:aspectj-autoproxy/>
 
 </beans>
