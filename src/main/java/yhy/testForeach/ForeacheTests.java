@@ -31,10 +31,12 @@ public class ForeacheTests {
         List<User> lists = new ArrayList<>();
         lists.add(user);
         lists.add(users);
+        /*使用forEach方式*/
         lists.forEach(e -> {
             System.out.println(e.getEmail());
         });
         System.out.println(lists.stream().map(demo -> demo.getEmail()).collect(Collectors.toList()));
+        /*使用stream().map方法*/
         List<String> collect = lists.stream().map(demo -> demo.getEmail()).collect(Collectors.toList());
         System.out.println(collect.get(0));
     }
