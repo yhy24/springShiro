@@ -4,6 +4,8 @@ import yhy.pojo.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * @Author: yhy
@@ -28,11 +30,12 @@ public class ForeacheTests {
 
         List<User> lists = new ArrayList<>();
         lists.add(user);
-        lists.stream().forEach(e -> {
+        lists.add(users);
+        lists.forEach(e -> {
             System.out.println(e.getEmail());
         });
-        for (User user1 : lists) {
-
-        }
+        System.out.println(lists.stream().map(demo -> demo.getEmail()).collect(Collectors.toList()));
+        List<String> collect = lists.stream().map(demo -> demo.getEmail()).collect(Collectors.toList());
+        System.out.println(collect.get(0));
     }
 }
