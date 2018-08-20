@@ -36,20 +36,4 @@
         <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
         <property name="basePackage" value="yhy.dao"/>
     </bean>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </beans>
