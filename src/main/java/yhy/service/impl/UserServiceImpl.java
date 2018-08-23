@@ -1,5 +1,7 @@
 package yhy.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import yhy.dao.UserDao;
 import yhy.exception.ServiceException;
@@ -45,5 +47,19 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("9999","该用户不存在的");
         }
         return user;
+    }
+
+    @Override
+    public PageInfo<User> findUserByPage(int page,int size) {
+        PageHelper.startPage(page, size);
+        List<User> users = userDao.findUser();
+        System.out.println("-----impl---"+users.toString());
+        return new PageInfo(users);
+    }
+
+    @Override
+    public int saveBatch(List<User> lists) {
+        int bath = userDao.saveBath(lists);
+        return bath;
     }
 }

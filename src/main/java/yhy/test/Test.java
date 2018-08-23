@@ -1,5 +1,6 @@
 package yhy.test;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
@@ -20,6 +21,11 @@ public class Test {
         String[] str = new String[]{"foo","boo"};
         List<String> list = Arrays.asList(str);
         logger.info("list->:"+ list.get(0));
+        String source = StringUtils.join(123256127, "-", 371, "-", "yang"); //25325-666-yang
+        String str1 = StringUtils.join("0","gdfhdfhfdhj");
+        System.out.println(source+"++++");
+        System.out.println(str1+"++++");
+
 
     }
 }
