@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="yhy.dao.UserDao">
 
+    <!--自行封装参数-->
+
 <!--查找全部用户-->
     <select id="findUser" resultType="yhy.pojo.User">
         SELECT * FROM  user_info
@@ -21,11 +23,19 @@
     3.如果传入的参数是多个的时候，我们就需要把它们封装成一个Map了，当然单参数也可以封装成map
     */-->
     <insert id="saveBath" parameterType="yhy.pojo.User">
-        INSERT INTO user_info (id,phone,age,email,username,password) VALUES
-
+        INSERT INTO user_info (id,phone,age,email,username,password,dept_id) VALUES
         <foreach collection="list" item="myuser" index="index" separator=",">
-            (#{myuser.id},#{myuser.phone},#{myuser.age},#{myuser.email},#{myuser.username},#{myuser.password})
+            (#{myuser.id},#{myuser.phone},#{myuser.age},#{myuser.email},#{myuser.username},#{myuser.password},#{myuser.deptId})
         </foreach>
     </insert>
+<!--useGeneratedKeys="true" keyProperty="id" 自动生成id并能够获取-->
+    <insert id="insertOne" parameterType="yhy.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_info (phone,age,email,username,password,dept_id) VALUES
+            (#{phone},#{age},#{email},#{username},#{password},#{deptId})
+    </insert>
 
+
+    <select id="getUsersByDeptId" resultType="yhy.pojo.User">
+        SELECT * FROM  user_info WHERE dept_id=#{id}
+    </select>
 </mapper>

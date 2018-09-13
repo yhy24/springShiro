@@ -1,0 +1,3 @@
+-----------Mybatis:进行如何读取参数--------------
+例如:
+public User getUserByid(List<Integer> ids);

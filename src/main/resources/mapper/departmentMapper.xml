@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yhy.dao.DepartmentMapper">
+<!--getDepartmentById：这个是测试分布查询使用 在另一个查询语句中调用-->
+    <select id="getDepartmentById" resultType="yhy.pojo.Department">
+        SELECT id id,dept_name deptName from dept WHERE id=#{id}
+    </select>
+
+
+    <!--getDepartmentByIdPlus:这个是用来测试javaBean中映射集合使用的-->
+    <resultMap id="myDept" type="yhy.pojo.Department">
+        <!--column：一般是数据表的的字段 或者 给该字段起的别名
+        property:对应javaBean的属性
+        -->
+        <id column="did" property="id"/>
+        <result column="dept_name" property="deptName"/>
+        <collection property="users" ofType="yhy.pojo.User">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="age" property="age"/>
+            <result column="email" property="email"/>
+        </collection>
+    </resultMap>
+    <select id="getDepartmentByIdPlus" resultMap="myDept">
+          SELECT u.id id,u.username username,u.age age,u.email email,d.id did,d.dept_name dept_name FROM
+           `dept` d LEFT JOIN user_info u ON d.id=u.dept_id WHERE d.id=#{id};
+    </select>
+
+    <!--======================使用dept分布查询啊==============================-->
+
+    <resultMap id="myDeptStep" type="yhy.pojo.Department">
+        <id column="id" property="id"/>
+        <result column="deptName" property="deptName"/>
+        <!--
+        column:getDepartmentByIdStep查出来的id 作为参数赋给select:作为参数进行查询
+        -->
+        <association property="users" select="yhy.dao.UserDao.getUsersByDeptId" column="id"/>
+    </resultMap>
+    <select id="getDepartmentByIdStep" resultMap="myDeptStep">
+        SELECT id id,dept_name deptName from dept WHERE id=#{id}
+    </select>
+</mapper>

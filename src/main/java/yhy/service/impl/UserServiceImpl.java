@@ -2,9 +2,13 @@ package yhy.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import yhy.dao.DepartmentMapper;
+import yhy.dao.PageDao;
 import yhy.dao.UserDao;
 import yhy.exception.ServiceException;
+import yhy.pojo.Department;
 import yhy.pojo.User;
 import yhy.service.UserService;
 
@@ -17,6 +21,10 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     UserDao userDao;
+    @Autowired
+    PageDao pageDao;
+    @Autowired
+    DepartmentMapper departmentMapper;
 
     @Override
     public List<User> getUsers() {
@@ -62,4 +70,36 @@ public class UserServiceImpl implements UserService {
         int bath = userDao.saveBath(lists);
         return bath;
     }
+
+    @Override
+    public int insertOne(User user) {
+        int i = userDao.insertOne(user);
+        return i;
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return pageDao.getUserById(id);
+    }
+
+    @Override
+    public User getUserByEId(Integer id) {
+        return pageDao.getUserByEId(id);
+    }
+
+    @Override
+    public User getUserByIdStep(Integer id) {
+        return pageDao.getUserByIdStep(id);
+    }
+
+    @Override
+    public Department getDepartmentByIdPlus(Integer id) {
+        return departmentMapper.getDepartmentByIdPlus(id);
+    }
+
+    @Override
+    public Department getDepartmentByIdStep(Integer id) {
+        return departmentMapper.getDepartmentByIdStep(id);
+    }
+
 }

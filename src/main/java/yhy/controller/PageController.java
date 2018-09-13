@@ -4,7 +4,9 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import yhy.pojo.Department;
 import yhy.pojo.User;
 import yhy.service.UserService;
 
@@ -60,5 +62,58 @@ public class PageController {
         System.out.println("-----------save------" + (end - start));
         return String.valueOf(saveBatch);
     }
+    @RequestMapping("/saveOne")
+    @ResponseBody
+    public String test() {
+        User user = new User();
+        user.setPhone("9659999");
+        user.setAge(20);
+        user.setEmail("hao@qq.com");
+        user.setUsername("ying");
+        user.setPassword("464655");
+        System.out.println("-----------one------");
+        int i = userService.insertOne(user);
+        System.out.println("-----userId------"+user.getId());
+        return "-------one-------";
+    }
 
+    @RequestMapping("/selectOne")
+    @ResponseBody
+    public String test1() {
+        return userService.getUserById(2).toString();
+    }
+    @RequestMapping("/selectTne")
+    @ResponseBody
+    public String test2() {
+        User userByEId = userService.getUserByEId(2);
+        System.out.println(userByEId.getDepartment().toString());
+        return userByEId.toString();
+    }
+    /*通过用户作为分布查询部门*/
+    @RequestMapping("/selectStep")
+    @ResponseBody
+    public String test3() {
+        User userByIdStep = userService.getUserByIdStep(2);
+        System.out.println("-----user:--------"+userByIdStep.toString());
+        System.out.println("--------step:-------" + userByIdStep.getDepartment());
+        return userByIdStep.toString();
+    }
+/*进行javaBean中集合的使用的映射关系的使用*/
+    @RequestMapping("/selectList")
+    @ResponseBody
+    public String test4() {
+        Department departmentByIdPlus = userService.getDepartmentByIdPlus(2);
+        System.out.println("-----user:--------"+departmentByIdPlus.toString());
+        System.out.println("--------step:-------" + departmentByIdPlus.getUsers().toString());
+        return departmentByIdPlus.toString();
+    }
+/*通过部门分布查询用户*/
+    @RequestMapping("/selectDeptList")
+    @ResponseBody
+    public String test5() {
+        Department departmentByIdStep = userService.getDepartmentByIdStep(2);
+        System.out.println("-----departmentByIdPlus:--------"+departmentByIdStep.toString());
+        System.out.println("--------listS:-------" + departmentByIdStep.getUsers().toString());
+        return departmentByIdStep.toString();
+    }
 }

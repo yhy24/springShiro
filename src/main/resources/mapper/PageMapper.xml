@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yhy.dao.PageDao">
+    <!--自定义结果映射规则-->
+    <resultMap id="myUser" type="yhy.pojo.User">
+        <!--
+        column:指定数据库中的列
+        property：指定javaBean中的属性名
+        -->
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="age" property="age"/>
+        <result column="mark" property="mark"/>
+        <result column="dept_id" property="deptId"/>
+    </resultMap>
+<!--resultMap：自定义结果映射规则-->
+    <select id="getUserById" resultMap="myUser">
+        SELECT * FROM user_info WHERE id=#{id}
+    </select>
+
+<!--关于自映射bean联合对象 第一种方式-->
+    <resultMap id="myDifUser1" type="yhy.pojo.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="email" property="email"/>
+        <result column="age" property="age"/>
+        <!--关于自映射bean 与DepartMent对应-->
+        <result column="d_id" property="department.id"/>
+        <result column="deptName" property="department.deptName"/>
+    </resultMap>
+
+<!--指定联合对象的第二种方式-->
+    <resultMap id="myDifUser2" type="yhy.pojo.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="email" property="email"/>
+        <result column="age" property="age"/>
+        <!--association:可以指定联合的javaBean的对象
+        property：type对象中的属性
+        javaType 指定联合对象的类型 ****不可省略
+        -->
+        <association property="department" javaType="yhy.pojo.Department">
+            <!-- d_id:别名 deptName 别名-->
+            <id column="d_id" property="id"/>
+            <result column="deptName" property="deptName"/>
+        </association>
+    </resultMap>
+
+    <select id="getUserByEId" resultMap="myDifUser2">
+        SELECT e.username username,e.age age,e.email email,d.dept_name deptName,d.id d_id
+        FROM `user_info` e,dept d
+        WHERE e.dept_id = d.id AND e.id = #{id};
+    </select>
+
+<!--================进行分布查询=3======================-->
+    <!--分布查询的好处：1.组合已有的方法2.可以使用延迟加载-->
+    <!--进行分布查询-->
+    <resultMap id="myDifUser3Step" type="yhy.pojo.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="email" property="email"/>
+        <result column="age" property="age"/>
+        <!--association:
+        select:表明查询当前方法的结果
+         column：指定那一列的值传(dept_id)给这个方法方法作为参数 并把select结果给属性department
+        -->
+       <association property="department" select="yhy.dao.DepartmentMapper.getDepartmentById" column="dept_id">
+       </association>
+    </resultMap>
+    <select id="getUserByIdStep" resultMap="myDifUser3Step">
+        SELECT * FROM user_info WHERE id=#{id}
+    </select>
+    <!--================association:的作用的使用=collection集合的使用=====================-->
+
+
+
+</mapper>

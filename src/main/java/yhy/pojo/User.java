@@ -14,6 +14,24 @@ public class User implements Serializable{
     private Integer age;
     private String mark;
     private String sexly;
+    private Integer deptId;
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
 
     public User() {
     }
@@ -115,6 +133,8 @@ public class User implements Serializable{
                 ", age=" + age +
                 ", mark='" + mark + '\'' +
                 ", sexly='" + sexly + '\'' +
+                ", deptId=" + deptId +
+                ", department=" + department +
                 '}';
     }
 }

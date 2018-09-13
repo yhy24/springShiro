@@ -22,7 +22,7 @@
     </bean>
 
     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManagerConfigFile" value="classpath:mapper/ehcache.xml"/>
+        <property name="cacheManagerConfigFile" value="classpath:ehcache/ehcache.xml"/>
     </bean>
     <bean id="jdbcRealm" class="yhy.service.impl.UserShiro">
         <!--对密码进行加密 使用MD5加密使用这个-->
