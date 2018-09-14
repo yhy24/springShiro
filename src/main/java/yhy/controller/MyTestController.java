@@ -9,6 +9,7 @@ import yhy.pojo.User;
 import yhy.service.MyTestServicce;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author: yhy
@@ -115,6 +116,13 @@ public class MyTestController {
         deleteConditionBO.setIds(lists);
         deleteConditionBO.setCode("b248");
         List<User> users = myTestServicce.getUsersByConditions(deleteConditionBO);
+        /*过滤的使用*/
+        List<Integer> collect1 = users.stream().filter(e -> e.getAge() > 20).map(e -> e.getId()).collect(Collectors.toList());
+        /*不用过滤的使用*/
+        List<Integer> collects = users.stream().map(e -> (e.getId())).collect(Collectors.toList());
+        for (Integer collect : collect1) {
+            System.out.println("-----id-------"+collect);
+        }
         for (User user : users) {
             System.out.println("---user:----"+user);
         }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans default-lazy-init="true"
-    xmlns="http://www.springframework.org/schema/beans" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:util="http://www.springframework.org/schema/util"
-    xsi:schemaLocation="
-       http://www.springframework.org/schema/beans   
-       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
        http://www.springframework.org/schema/util
-       http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+       http://www.springframework.org/schema/util/spring-util-4.3.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring">
 
 <!--连接池的配置参数-->
         <util:properties id="cfg" location="classpath:mybatisConfig.properties"/>
@@ -28,12 +28,18 @@
 <!--spring-mybatis的整合-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!--全局配置文件-->
+        <!--<property name="configLocation" value="xxxx"/>-->
+        <!--配置扫描mapper配置文件-->
         <property name="mapperLocations" value="classpath:mapper/**.xml"/>
     </bean>
-
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!--过时可以不使用-->
-        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--扫描dao:使用<mybatis-spring:scan>这个标签和使用 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 这个标签效果是一样的-->
+    <!--新版本使用这个标签扫描 dao-->
+    <mybatis-spring:scan base-package="yhy.dao"/>
+   <!--老版本使用<Bean>标签扫描 dao-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        &lt;!&ndash;过时可以不使用&ndash;&gt;
+        &lt;!&ndash;<property name="sqlSessionFactory" ref="sqlSessionFactory"/>&ndash;&gt;
         <property name="basePackage" value="yhy.dao"/>
-    </bean>
+    </bean>-->
 </beans>
