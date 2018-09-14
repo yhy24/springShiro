@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yhy.dao.DynamicMapper">
+
+    <sql id="if_test">
+        <if test="id != null">
+            AND id=#{id}
+        </if>
+        <if test="email != null and email.trim() != ''">
+            and email=#{email}
+        </if>
+        <if test="sexly != null and sexly.trim() != ''">
+            AND sexly=#{sexly}
+        </if>
+    </sql>
+    <!--动态sql的使用: OGNL表达式
+    if:
+    trim:字符串的截取(when(封装查询条件)，set(封装修改条件))
+    forach:进行遍历的使用的
+    choose:(when ，otherwise):分支选择
+    -->
+    <!--if:的使用-->
+    <select id="getUsesByConditionsIf" resultType="yhy.pojo.User">
+        /*使用where 1=1 会识别and 和使用where标签 只会识别开头的and 不会识别末尾的and*/
+        SELECT * FROM user_info
+        WHERE 1=1
+
+        <if test="id != null">
+            AND id=#{id}
+        </if>
+        <if test="email != null and email.trim() != ''">
+            and email=#{email}
+        </if>
+        <if test="sexly != null and sexly.trim() != ''">
+            AND sexly=#{sexly}
+        </if>
+
+       <!-- <where>
+            <if test="id != null">
+                AND id=#{id}
+            </if>
+            <if test="email != null and email.trim() != ''">
+                and email=#{email}
+            </if>
+            <if test="sexly != null and sexly.trim() != ''">
+                AND sexly=#{sexly}
+            </if>
+        </where>-->
+    </select>
+<!--trim:解决where标签不能解决后缀的问题
+        prefix="" :前缀
+        prefixOverrides="" 前缀覆盖 类似去掉id=#{id} 前的and
+        suffix="" ：后缀
+        suffixOverrides="" ：后缀覆盖-->
+    <select id="getUsesByConditionsTrim" resultType="yhy.pojo.User">
+        SELECT * FROM user_info
+
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id != null">
+                AND id=#{id}
+            </if>
+            <if test="email != null and email.trim() != ''">
+                and email=#{email}
+            </if>
+            <if test="sexly != null and sexly.trim() != ''">
+                AND sexly=#{sexly}
+            </if>
+        </trim>
+    </select>
+
+<!--choose:分支语句的使用-->
+    <select id="getUsesByConditionsChoose" resultType="yhy.pojo.User">
+            SELECT * FROM user_info
+            <where>
+                <choose>
+                    <when test="id != null">
+                        id=#{id}
+                    </when>
+                    <when test="email != null">
+                        email=#{email}
+                    </when>
+                    <otherwise>
+                        code=3
+                    </otherwise>
+                </choose>
+            </where>
+    </select>
+
+
+
+    <update id="updateUserById" parameterType="yhy.pojo.User">
+        UPDATE user_info
+        /*第一种方式*/
+        <!--<set>
+            <if test="username != null">
+                username=#{username},
+            </if>
+            <if test="age != null">
+                age=#{age},
+            </if>
+            <if test="email != null">
+                email=#{email}
+            </if>
+        </set>
+        WHERE id=#{id}-->
+        /*第二种方式 使用trim字符串的拼接的使用*/
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username != null">
+                username=#{username},
+            </if>
+            <if test="age != null">
+                age=#{age},
+            </if>
+            <if test="email != null">
+                email=#{email},
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <!--
+        *collection：指定遍历的集合：list类型的参数会特殊处理封装在map中，map的key就叫list
+        *item:将当前遍历出的元素赋值给指定的变量
+        *#{变量的名}就能取出变量的值也就是当前遍历的元素
+        *separator:每个元素的分隔符
+        *open:遍历的所有的结果拼接一个开始的字符
+        *close:遍历的所有的结果拼接一个结束的字符
+        *index：遍历list的时候是索引，遍历map的时候是key item就是map的值
+    -->
+    <select id="getUsesByConditionsForeach" resultType="yhy.pojo.User" parameterType="java.util.List">
+        SELECT * FROM user_info WHERE id IN
+        <foreach collection="ids" item="item_ids" open="(" separator="," close=")" >
+             #{item_ids}
+        </foreach>
+    </select>
+
+    <select id="getUsesByConditions" resultType="yhy.pojo.User">
+        SELECT * FROM user_info WHERE id IN (1,2,6,9)
+    </select>
+    <!--根据id删除用户-->
+    <delete id="deteUsersByDeleteConditions" parameterType="yhy.bo.DeleteConditionBO">
+          DELETE FROM user_info WHERE id IN
+          <foreach collection="ids" item="id" open="(" separator="," close=")">
+              #{id}
+          </foreach>
+    </delete>
+
+
+
+    <!--根据id查询用户-->
+    <select id="getUsersByConditions" parameterType="yhy.bo.DeleteConditionBO" resultType="yhy.pojo.User">
+         select * from user_info WHERE id IN
+         <foreach collection="ids" item="id" open="(" separator="," close=")">
+             #{id}
+         </foreach>
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

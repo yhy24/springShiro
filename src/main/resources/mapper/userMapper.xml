@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="yhy.dao.UserDao">
+    <!--抽取公共部分-->
+    <sql id="sql_test">
+        SELECT * FROM  user_info
+    </sql>
 
     <!--自行封装参数-->
 
+
 <!--查找全部用户-->
     <select id="findUser" resultType="yhy.pojo.User">
-        SELECT * FROM  user_info
+        /*引用的出去的部分*/
+        <include refid="sql_test"/>
     </select>
 <!--根据姓名查找用户-->
     <select id="findOneUser"  resultType="yhy.pojo.User">
-        SELECT * FROM user_info WHERE username=#{username}
+        <include refid="sql_test"/>  WHERE username=#{username}
     </select>
 <!--进行批量保存用户-->
    <!-- /*collection：参数的类型  item:list中的对象
