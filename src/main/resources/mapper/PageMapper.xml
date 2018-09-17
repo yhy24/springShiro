@@ -29,6 +29,11 @@
         <result column="d_id" property="department.id"/>
         <result column="deptName" property="department.deptName"/>
     </resultMap>
+    <select id="getUserByEId1" resultMap="myDifUser1">
+        SELECT e.username username,e.age age,e.email email,d.dept_name deptName,d.id d_id
+        FROM `user_info` e,dept d
+        WHERE e.dept_id = d.id AND e.id = #{id};
+    </select>
 
 <!--指定联合对象的第二种方式-->
     <resultMap id="myDifUser2" type="yhy.pojo.User">
