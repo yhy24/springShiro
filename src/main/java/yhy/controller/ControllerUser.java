@@ -1,5 +1,7 @@
 package yhy.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.SecurityUtils;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import yhy.exception.ServiceException;
+import yhy.pojo.Department;
 import yhy.pojo.User;
 import yhy.service.UserService;
 import yhy.util.ExcelUtil;
@@ -137,6 +140,7 @@ public class ControllerUser {
     @RequestMapping("/info")
     @ResponseBody
     public String userInfo(){
+        PageHelper.startPage(1, 5);
         List<User> list = userService.getUsers();
         /*控制台查看数据*/
         for(User user :list){
@@ -171,8 +175,19 @@ public class ControllerUser {
         return user.toString();
     }
 
-    /*没有实际的意义只是测试代码*/
-    String str = "门前一条河，河里一群鸭，快来快来数一数，24678";
-    String nuc = "a beautiful day";
-
+    @RequestMapping("/pageInfo")
+    @ResponseBody
+    public String testPageInfo() throws ServiceException {
+        Department department = new Department();
+        department.setId(2);
+        PageInfo<User> pageInfo = userService.getUsers(1, 3, department);
+        System.out.println("-------Total---------"+pageInfo.getTotal());
+        List<User> list = pageInfo.getList();
+        System.out.println("----endRow---------"+pageInfo.getEndRow());
+        System.out.println("-------pages----"+pageInfo.getPages());
+        for (User user : list) {
+            System.out.println(user.toString());
+        }
+        return list.toString();
+    }
 }

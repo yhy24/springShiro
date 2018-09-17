@@ -44,4 +44,7 @@
     <select id="getUsersByDeptId" resultType="yhy.pojo.User">
         SELECT * FROM  user_info WHERE dept_id=#{id}
     </select>
+    <select id="getUsers" resultType="yhy.pojo.User">
+        <include refid="sql_test"/> WHERE dept_id=#{id}
+    </select>
 </mapper>

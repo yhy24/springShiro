@@ -102,4 +102,11 @@ public class UserServiceImpl implements UserService {
         return departmentMapper.getDepartmentByIdStep(id);
     }
 
+    @Override
+    public PageInfo<User> getUsers(int start,int pages,Department department) {
+        PageHelper.startPage(start, pages);
+        List<User> users = userDao.getUsers(department);
+        return new PageInfo(users);
+    }
+
 }

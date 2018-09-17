@@ -144,9 +144,6 @@
               #{id}
           </foreach>
     </delete>
-
-
-
     <!--根据id查询用户-->
     <select id="getUsersByConditions" parameterType="yhy.bo.DeleteConditionBO" resultType="yhy.pojo.User">
          select * from user_info WHERE id IN

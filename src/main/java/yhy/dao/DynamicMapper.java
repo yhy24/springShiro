@@ -14,6 +14,7 @@ import java.util.List;
 public interface DynamicMapper {
 
     public List<User> getUsesByConditionsIf(User user);
+
     public List<User> getUsesByConditionsTrim(User user);
 
     public List<User> getUsesByConditionsChoose(User user);

@@ -11,7 +11,8 @@
 
 <!--连接池的配置参数-->
         <util:properties id="cfg" location="classpath:mybatisConfig.properties"/>
-        <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <!--配置连接池的使用-->
+     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
             <property name="url" value="#{cfg.url}"/>
             <property name="driverClassName" value="#{cfg.driverClassName}"/>
             <property name="username" value="#{cfg.username}"/>
@@ -24,12 +25,12 @@
             <property name="minIdle" value="#{cfg.minIdle}" />
             <!-- 获取连接最大等待时间 -->
             <property name="maxWait" value="#{cfg.maxWait}" />
-        </bean>
+     </bean>
 <!--spring-mybatis的整合-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--全局配置文件-->
-        <!--<property name="configLocation" value="xxxx"/>-->
+        <property name="configLocation" value="classpath:mybatis/envirements.xml"/>
         <!--配置扫描mapper配置文件-->
         <property name="mapperLocations" value="classpath:mapper/**.xml"/>
     </bean>
@@ -42,4 +43,9 @@
         &lt;!&ndash;<property name="sqlSessionFactory" ref="sqlSessionFactory"/>&ndash;&gt;
         <property name="basePackage" value="yhy.dao"/>
     </bean>-->
+    <!--批量保存的使用-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+        <constructor-arg name="executorType" value="BATCH"></constructor-arg>
+    </bean>
 </beans>

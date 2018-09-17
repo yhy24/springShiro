@@ -10,7 +10,9 @@ import yhy.pojo.User;
 public interface PageDao {
 
     public User getUserById(Integer id);
+
     public User getUserByEId(Integer id);
+
     /*测试分布查询*/
     public User getUserByIdStep(Integer id);
 }

@@ -8,9 +8,11 @@ import yhy.pojo.Department;
  * @Version 1.0
  */
 public interface DepartmentMapper {
-/*使用user分布查询 getDepartmentById*/
+    /*使用user分布查询 getDepartmentById*/
     public Department getDepartmentById(Integer id);
+
     public Department getDepartmentByIdPlus(Integer id);
+
     /*使用部门分布查询 getDepartmentByIdStep*/
     public Department getDepartmentByIdStep(Integer id);
 }

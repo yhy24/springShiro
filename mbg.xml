@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--jdbcConnection:指定如何连接到指定的数据库-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+    <!--java类型解析器-->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+    <!--javaModelGenerator:指定javaBean的生成策略-->
+        <javaModelGenerator targetPackage="com.yang.mybatis.bean" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+    <!--sqlMapGenerator:sql映射的生成的策略-->
+        <sqlMapGenerator targetPackage="mappers"  targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+     <!--javaClientGenerator:指定mapper(dao)所在的接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yang.mybatis.dao"  targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <!--table:指定要逆向生成那些表 根据表要创建javaBen-->
+        <table tableName="user_info" domainObjectName="User"></table>
+        <table tableName="dept" domainObjectName="Department"></table>
+    </context>
+</generatorConfiguration>

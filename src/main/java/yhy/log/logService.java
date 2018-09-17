@@ -31,7 +31,7 @@ public class logService {
     @Before(value = "execution(* yhy.service..*(..))")
     public void testLog(JoinPoint joinpoint) {
         String name = joinpoint.getSignature().getName();
-        System.out.println("----------I am coming-----------");
+        System.out.println("----------I am coming-------Aspect----");
         System.out.println("----------logName--------" + name);
     }
 
