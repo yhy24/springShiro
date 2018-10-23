@@ -52,6 +52,7 @@ public class CheckController {
         g.setColor(Color.white);
         g.fillRect(1,1,width-2,height-2);
 //        设置干扰线的颜色
+
         g.setColor(Color.green);
         for (int i =0;i < lineCount;i++) {
             g.drawLine(r.nextInt(width),r.nextInt(width),r.nextInt(width),r.nextInt(width));
