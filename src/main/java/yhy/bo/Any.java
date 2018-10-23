@@ -11,6 +11,16 @@ public class Any {
 
     private String age;
 
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
+
+    private Integer money;
+
     public String getAge() {
         return age;
     }
