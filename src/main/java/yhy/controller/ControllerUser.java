@@ -1,5 +1,6 @@
 package yhy.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.log4j.Logger;
@@ -172,7 +173,7 @@ public class ControllerUser {
     public String fingUserByName() throws ServiceException {
         String name = "科比";
         User user = userService.findUserByName(name);
-        return user.toString();
+        return JSONObject.toJSONString(user);
     }
 
     @RequestMapping("/pageInfo")
