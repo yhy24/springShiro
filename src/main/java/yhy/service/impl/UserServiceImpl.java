@@ -109,4 +109,9 @@ public class UserServiceImpl implements UserService {
         return new PageInfo(users);
     }
 
+    @Override
+    public void deleteIds(User user) {
+        userDao.deleteIds(user);
+    }
+
 }

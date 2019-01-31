@@ -1,6 +1,7 @@
 package yhy.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class User implements Serializable{
     private static final long serialVersionUID = -5046972860468900599L;
@@ -15,6 +16,16 @@ public class User implements Serializable{
     private String mark;
     private String sexly;
     private Integer deptId;
+    private List<Integer> lists;
+
+    public List<Integer> getLists() {
+        return lists;
+    }
+
+    public void setLists(List<Integer> lists) {
+        this.lists = lists;
+    }
+
     private Department department;
 
     public Department getDepartment() {

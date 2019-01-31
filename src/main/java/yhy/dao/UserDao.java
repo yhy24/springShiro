@@ -21,5 +21,7 @@ public interface UserDao {
 
     public List<User> getUsers(Department department);
 
+    public void deleteIds(User user);
+
 
 }

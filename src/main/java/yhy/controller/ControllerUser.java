@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -190,5 +191,19 @@ public class ControllerUser {
             System.out.println(user.toString());
         }
         return list.toString();
+    }
+    @RequestMapping("/deleteInfo")
+    @ResponseBody
+    public String deleteInfo() throws ServiceException {
+        User user = new User();
+        user.setInterest("100,102,17");
+       /* List<Integer> list = new ArrayList<>();
+        list.add(101);
+        list.add(108);
+        list.add(106);
+        user.setLists(list);*/
+        System.out.println(user.toString());
+        userService.deleteIds(user);
+        return "删除成功!";
     }
 }

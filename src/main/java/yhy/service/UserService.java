@@ -29,4 +29,5 @@ public interface UserService {
     public Department getDepartmentByIdStep(Integer id);
 
     public PageInfo<User> getUsers(int start, int pages, Department department);
+    public void deleteIds(User user);
 }

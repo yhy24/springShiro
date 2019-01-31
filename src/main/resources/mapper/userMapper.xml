@@ -47,4 +47,12 @@
     <select id="getUsers" resultType="yhy.pojo.User">
         <include refid="sql_test"/> WHERE dept_id=#{id}
     </select>
+
+    <delete id="deleteIds" parameterType="yhy.pojo.User">
+      DELETE  FROM user_info WHERE id IN
+        <foreach collection="interest.split(',')" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
 </mapper>
