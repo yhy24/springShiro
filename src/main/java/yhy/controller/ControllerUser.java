@@ -211,6 +211,7 @@ public class ControllerUser {
     @ResponseBody
     public String google() {
         System.out.println("只是做一个测试使用的!");
+        System.out.println("只是做一个测试使用的2");
         return null;
     }
 
