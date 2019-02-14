@@ -206,4 +206,13 @@ public class ControllerUser {
         userService.deleteIds(user);
         return "删除成功!";
     }
+
+
+
+    public void ttt() {
+        if ("123".equals("456")) {
+            System.out.println("ceshi!");
+        }
+        return;
+    }
 }
