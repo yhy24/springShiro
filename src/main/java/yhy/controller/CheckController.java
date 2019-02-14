@@ -79,4 +79,7 @@ public class CheckController {
         //8.关闭sos
         out.close();
     }
+    public String test() {
+        return null;
+    }
 }

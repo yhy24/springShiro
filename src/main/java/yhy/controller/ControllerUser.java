@@ -206,4 +206,14 @@ public class ControllerUser {
         userService.deleteIds(user);
         return "删除成功!";
     }
+
+    @RequestMapping("/good")
+    @ResponseBody
+    public String google() {
+        System.out.println("只是做一个测试使用的!");
+        return null;
+    }
+
+
+
 }
