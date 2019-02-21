@@ -215,12 +215,6 @@ public class ControllerUser {
         return null;
     }
 
-    public void test2(){
-        System.out.println("测试代码的回退的使用");
-    }
-
-
-
 
 
 }
