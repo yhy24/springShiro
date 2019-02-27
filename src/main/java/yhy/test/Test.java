@@ -1,7 +1,11 @@
 package yhy.test;
 
+import com.dyuproject.protostuff.LinkedBuffer;
+import com.dyuproject.protostuff.ProtobufIOUtil;
+import com.dyuproject.protostuff.runtime.RuntimeSchema;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import yhy.pojo.Department;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,4 +32,24 @@ public class Test {
 
 
     }
+
+    public Department testY() {
+        RuntimeSchema<Department> schema = RuntimeSchema.createFrom(Department.class);
+        Department department = new Department();
+        department.setId(1314);
+        department.setDeptName("研发部测试");
+        byte[] bytes = ProtobufIOUtil.toByteArray(department, schema, LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
+        Department depart = schema.newMessage();
+        ProtobufIOUtil.mergeFrom(bytes, depart, schema);
+        return depart;
+    }
+    @org.junit.Test
+    public void test() {
+        Department department = testY();
+        System.out.println(department.toString());
+    }
+
+
+
+
 }
