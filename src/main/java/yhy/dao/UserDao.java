@@ -29,5 +29,5 @@ public interface UserDao {
 
     public User testUser(User user);
 
-
+    public List<User> usersTest(@Param("ids") List<Long> ids);
 }
