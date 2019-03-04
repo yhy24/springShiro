@@ -27,5 +27,7 @@ public interface UserDao {
 
     public void insertInto(List<User> users);
 
+    public User testUser(User user);
+
 
 }

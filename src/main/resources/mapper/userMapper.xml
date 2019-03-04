@@ -5,7 +5,9 @@
     <sql id="sql_test">
         SELECT * FROM  user_info
     </sql>
-
+    <select id="testUser" parameterType="yhy.pojo.User" resultType="yhy.pojo.User">
+        select * from user_info WHERE id = #{id};
+    </select>
     <!--自行封装参数-->
 
 
