@@ -47,6 +47,14 @@
     <select id="getUsers" resultType="yhy.pojo.User">
         <include refid="sql_test"/> WHERE dept_id=#{id}
     </select>
+    <select id="getByFor" resultType="java.lang.String">
+        SELECT username FROM  user_info WHERE id IN
+        <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        and
+        gender =#{gender}
+    </select>
 
     <delete id="deleteIds" parameterType="yhy.pojo.User">
       DELETE  FROM user_info WHERE id IN
@@ -54,5 +62,15 @@
             #{id}
         </foreach>
     </delete>
-
+    <insert id="insertInto" parameterType="yhy.pojo.User">
+      INSERT INTO user_info (phone,age,email,user+name,password,dept_id) VALUES
+        <foreach collection="list" item="user" index="index" open="(" separator="," close=")">
+            #{user.phone},
+            #{user.age},
+            #{user.email},
+            #{user.username},
+            #{user.password},
+            #{user.deptId}
+        </foreach>
+    </insert>
 </mapper>

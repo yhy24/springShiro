@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     UserDao userDao;
-    @Autowired
+    @Resource
     PageDao pageDao;
     @Autowired
     DepartmentMapper departmentMapper;
@@ -112,6 +112,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteIds(User user) {
         userDao.deleteIds(user);
+    }
+
+    @Override
+    public List<String> getByFor(List<Long> ids, String gender) {
+        return userDao.getByFor(ids,gender );
+    }
+
+    @Override
+    public void insertInto(List<User> users) {
+        userDao.insertInto(users);
+
     }
 
 }

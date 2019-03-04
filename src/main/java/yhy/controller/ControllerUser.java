@@ -215,6 +215,48 @@ public class ControllerUser {
         return null;
     }
 
+    @RequestMapping("/getFor")
+    @ResponseBody
+    public String getFore() {
+        List<Long> ids = new ArrayList<>();
+        ids.add(1L);
+        ids.add(3L);
+        ids.add(5L);
+        List<String> b = userService.getByFor(ids, "b");
+        return b.toString();
+    }
+    @RequestMapping("/usersInsert")
+    @ResponseBody
+    public String usersInsert() {
+        List<User> users = new ArrayList<>();
+        User user1 = new User();
+        user1.setPhone("1598746");
+        user1.setAge(5);
+        user1.setEmail("gjaoj@qq.com");
+        user1.setUsername("张扬");
+        user1.setPassword("123546");
+        user1.setDeptId(3);
+        User user2 = new User();
+        user2.setPhone("974654");
+        user2.setAge(56);
+        user2.setEmail("mgij@qq.com");
+        user2.setUsername("刘杨");
+        user2.setPassword("96352");
+        user2.setDeptId(6);
+        User user3 = new User();
+        user3.setPhone("1685452");
+        user3.setAge(15);
+        user3.setEmail("fjodijo@hu");
+        user3.setUsername("柳杨");
+        user3.setPassword("485465");
+        user3.setDeptId(8);
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        userService.insertInto(users);
+        return "成功!";
+    }
+
 
 
 }

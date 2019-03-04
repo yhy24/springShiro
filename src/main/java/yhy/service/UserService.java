@@ -30,4 +30,6 @@ public interface UserService {
 
     public PageInfo<User> getUsers(int start, int pages, Department department);
     public void deleteIds(User user);
+    public List<String> getByFor(List<Long> ids,String gender);
+    public void insertInto(List<User> users);
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserDao {
     public List<User> findUser();
     public User findOneUser(@Param("username") String username);
-    public List<User> findUserPage();
+//    public List<User> findUserPage();
 
     public int saveBath(List<User> lists);
 
@@ -22,6 +22,10 @@ public interface UserDao {
     public List<User> getUsers(Department department);
 
     public void deleteIds(User user);
+
+    public List<String> getByFor(@Param("ids") List<Long> ids,@Param("gender") String gender);
+
+    public void insertInto(List<User> users);
 
 
 }
