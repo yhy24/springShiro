@@ -1,5 +1,6 @@
 package yhy.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import yhy.exception.ServiceException;
 import yhy.pojo.Department;
+import yhy.pojo.PageBean;
 import yhy.pojo.User;
 import yhy.service.UserService;
 import yhy.util.ExcelUtil;
@@ -255,6 +257,16 @@ public class ControllerUser {
         users.add(user3);
         userService.insertInto(users);
         return "成功!";
+    }
+    @RequestMapping("/getPage")
+    public String getPage() {
+        PageBean pageBean = new PageBean();
+        pageBean.setPageNum(2);
+        pageBean.setPageSize(5);
+        PageInfo<User> userList = userService.getUserList(pageBean);
+        long total = userList.getTotal();
+        System.out.println(total);
+        return userList.getList().toString();
     }
 
 

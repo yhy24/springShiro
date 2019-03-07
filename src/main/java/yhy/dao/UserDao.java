@@ -1,5 +1,6 @@
 package yhy.dao;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import yhy.pojo.Department;
@@ -30,4 +31,6 @@ public interface UserDao {
     public User testUser(User user);
 
     public List<User> usersTest(@Param("ids") List<Long> ids);
+
+    public Page<User> getUserList();
 }

@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!--打印sql日志-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
     <!--全局文件的使用配置使用 spring-mybatis中进行加载配置-->
     <!--使用分页查询的插件的使用 配置-->
     <plugins>

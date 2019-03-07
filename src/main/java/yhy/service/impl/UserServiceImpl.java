@@ -1,5 +1,6 @@
 package yhy.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import yhy.dao.PageDao;
 import yhy.dao.UserDao;
 import yhy.exception.ServiceException;
 import yhy.pojo.Department;
+import yhy.pojo.PageBean;
 import yhy.pojo.User;
 import yhy.service.UserService;
 
@@ -123,6 +125,12 @@ public class UserServiceImpl implements UserService {
     public void insertInto(List<User> users) {
         userDao.insertInto(users);
 
+    }
+
+    @Override
+    public PageInfo<User> getUserList(PageBean pageBean) {
+        PageHelper.startPage(pageBean.getPageNum(), pageBean.getPageSize());
+        return new PageInfo<User>(userDao.getUserList());
     }
 
 }

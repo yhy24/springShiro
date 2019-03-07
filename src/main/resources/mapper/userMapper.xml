@@ -64,6 +64,10 @@
         </foreach>
     </select>
 
+    <select id="getUserList" resultType="yhy.pojo.User">
+       SELECT * FROM  user_info
+    </select>
+
     <delete id="deleteIds" parameterType="yhy.pojo.User">
       DELETE  FROM user_info WHERE id IN
         <foreach collection="interest.split(',')" item="id" index="index" open="(" separator="," close=")">

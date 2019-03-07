@@ -3,6 +3,7 @@ package yhy.service;
 import com.github.pagehelper.PageInfo;
 import yhy.exception.ServiceException;
 import yhy.pojo.Department;
+import yhy.pojo.PageBean;
 import yhy.pojo.User;
 
 import java.util.List;
@@ -32,4 +33,5 @@ public interface UserService {
     public void deleteIds(User user);
     public List<String> getByFor(List<Long> ids,String gender);
     public void insertInto(List<User> users);
+    public PageInfo<User> getUserList(PageBean pageBean);
 }
