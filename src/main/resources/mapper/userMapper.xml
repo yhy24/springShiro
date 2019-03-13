@@ -5,7 +5,7 @@
     <sql id="sql_test">
         SELECT * FROM  user_info
     </sql>
-    <select id="testUser" parameterType="yhy.pojo.User" resultType="yhy.pojo.User">
+    <select id="testUser" resultType="yhy.pojo.User">
         select * from user_info WHERE id = #{id};
     </select>
     <!--自行封装参数-->
@@ -85,4 +85,21 @@
             #{user.deptId}
         </foreach>
     </insert>
+
+    <select id="testDate" resultType="yhy.pojo.User" parameterType="yhy.pojo.User">
+      SELECT * from user_info
+      <where>
+          <if test="age != null and age != ''">
+            age = #{age}
+          </if>
+          <if test="code !=null and code!=''">
+              and code=#{code}
+          </if>
+          <if test="deptId !=null and code != ''">
+             and  deptId = #{deptId}
+          </if>
+      </where>
+    </select>
+
+
 </mapper>

@@ -28,9 +28,11 @@ public interface UserDao {
 
     public void insertInto(List<User> users);
 
-    public User testUser(User user);
+    public User testUser(Integer id);
 
     public List<User> usersTest(@Param("ids") List<Long> ids);
 
     public Page<User> getUserList();
+
+    public List<User> testDate(User user);
 }

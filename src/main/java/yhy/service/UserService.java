@@ -34,4 +34,6 @@ public interface UserService {
     public List<String> getByFor(List<Long> ids,String gender);
     public void insertInto(List<User> users);
     public PageInfo<User> getUserList(PageBean pageBean);
+    public User testUser(Integer id);
+    public List<User> testDate(User user);
 }

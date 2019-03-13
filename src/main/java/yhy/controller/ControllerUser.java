@@ -13,6 +13,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -267,6 +268,23 @@ public class ControllerUser {
         long total = userList.getTotal();
         System.out.println(total);
         return userList.getList().toString();
+    }
+    @RequestMapping("/testUser/{id}")
+    public String testUser(@PathVariable("id") Integer id) {
+        User user1 = userService.testUser(id);
+        return user1.toString();
+    }
+
+    @RequestMapping("/date")
+    public String testDate() {
+        User user = new User();
+        user.setCode("1");
+        user.setAge(25);
+        List<User> list = userService.testDate(user);
+        for (User user1 : list) {
+            System.out.println(user1.toString());
+        }
+        return list.toString();
     }
 
 

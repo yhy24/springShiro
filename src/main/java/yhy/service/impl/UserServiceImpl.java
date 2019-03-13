@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import yhy.dao.DepartmentMapper;
 import yhy.dao.PageDao;
@@ -131,6 +132,18 @@ public class UserServiceImpl implements UserService {
     public PageInfo<User> getUserList(PageBean pageBean) {
         PageHelper.startPage(pageBean.getPageNum(), pageBean.getPageSize());
         return new PageInfo<User>(userDao.getUserList());
+    }
+
+    @Override
+    @Cacheable(value = "cache",key = "'REDIS_'+#user.id")
+    public User testUser(Integer id) {
+        System.out.println("我来了.........");
+        return userDao.testUser(id);
+    }
+
+    @Override
+    public List<User> testDate(User user) {
+        return userDao.testDate(user);
     }
 
 }

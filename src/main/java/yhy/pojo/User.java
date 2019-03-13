@@ -1,6 +1,7 @@
 package yhy.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class User implements Serializable{
@@ -16,6 +17,34 @@ public class User implements Serializable{
     private String mark;
     private String sexly;
     private Integer deptId;
+    private Date modifyDate;
+    private Date createDate;
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Date getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     private List<Integer> lists;
 
     public List<Integer> getLists() {
@@ -45,18 +74,6 @@ public class User implements Serializable{
     }
 
     public User() {
-    }
-
-    public User(Integer id, String username, String password, String interest, String phone, String email, Integer age, String mark, String sexly) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.interest = interest;
-        this.phone = phone;
-        this.email = email;
-        this.age = age;
-        this.mark = mark;
-        this.sexly = sexly;
     }
 
     public Integer getId() {
@@ -132,6 +149,24 @@ public class User implements Serializable{
         this.sexly = sexly;
     }
 
+    public User(Integer id, String username, String password, String interest, String phone, String email, Integer age, String mark, String sexly, Integer deptId, Date modifyDate, Date createDate, String code, List<Integer> lists, Department department) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.interest = interest;
+        this.phone = phone;
+        this.email = email;
+        this.age = age;
+        this.mark = mark;
+        this.sexly = sexly;
+        this.deptId = deptId;
+        this.modifyDate = modifyDate;
+        this.createDate = createDate;
+        this.code = code;
+        this.lists = lists;
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -145,6 +180,10 @@ public class User implements Serializable{
                 ", mark='" + mark + '\'' +
                 ", sexly='" + sexly + '\'' +
                 ", deptId=" + deptId +
+                ", modifyDate=" + modifyDate +
+                ", createDate=" + createDate +
+                ", code='" + code + '\'' +
+                ", lists=" + lists +
                 ", department=" + department +
                 '}';
     }
