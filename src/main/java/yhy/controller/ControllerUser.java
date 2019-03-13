@@ -12,11 +12,9 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import yhy.exception.ServiceException;
 import yhy.pojo.Department;
 import yhy.pojo.PageBean;
@@ -27,6 +25,7 @@ import yhy.util.ExcelUtil;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -41,6 +40,8 @@ public class ControllerUser {
 
     @Resource
     UserService userService;
+@Autowired
+    HttpServletRequest request;
 
     private Subject subject=null;
 
@@ -70,13 +71,20 @@ public class ControllerUser {
 
     @RequestMapping("/success")
     public String handleSuccess(@RequestParam("username") String username,@RequestParam("password")String password){
-        Session session = SecurityUtils.getSubject().getSession();
-        String info = shiroLogin(username,password);
-        if (!"SUCCESS".equals(info)){
-            session.setAttribute("fM",info);
-            return "unauthorized";
+        try {
+            User userByName = userService.findUserByName(username);
+            HttpSession session1 = request.getSession();
+            session1.setAttribute("userInfo",userByName);
+            Session session = SecurityUtils.getSubject().getSession();
+            String info = shiroLogin(username,password);
+            if (!"SUCCESS".equals(info)){
+                session.setAttribute("fM",info);
+                return "unauthorized";
+            }
+            session.setAttribute("sM","登录成功");
+        } catch (ServiceException e) {
+            e.printStackTrace();
         }
-        session.setAttribute("sM","登录成功");
         return "loginSuccess";
     }
 
@@ -269,7 +277,7 @@ public class ControllerUser {
         System.out.println(total);
         return userList.getList().toString();
     }
-    @RequestMapping("/testUser/{id}")
+    @RequestMapping(value = "/testUser/{id}",method = RequestMethod.GET)
     public String testUser(@PathVariable("id") Integer id) {
         User user1 = userService.testUser(id);
         return user1.toString();

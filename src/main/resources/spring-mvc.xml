@@ -25,4 +25,16 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+<!--拦截器的使用的说明配置使用，自定义拦截的class-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>  <!--对所有的进行拦截处理-->
+            <mvc:exclude-mapping path="/testUser/**"/>  <!--排除不需要的拦截-->
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/success"/>
+            <bean id="HandlerIntercepter" class="yhy.intercepter.PrimiteIntecepter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 </beans>
