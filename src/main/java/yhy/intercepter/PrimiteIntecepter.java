@@ -31,7 +31,7 @@ public class PrimiteIntecepter extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url = urlPathHelper.getLookupPathForRequest(request);
-        HttpSession session = request.getSession(false);
+      /*  HttpSession session = request.getSession(false);
         User user= (User) session.getAttribute("userInfo");
         if (user == null) {
             PrintWriter writer = response.getWriter();
@@ -39,7 +39,7 @@ public class PrimiteIntecepter extends HandlerInterceptorAdapter {
             writer.flush();
             writer.close();
             return false;
-        }
+        }*/
         System.out.println(url);
         System.out.println("preHandle.............");
         return true;

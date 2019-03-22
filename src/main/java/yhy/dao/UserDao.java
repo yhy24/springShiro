@@ -35,4 +35,6 @@ public interface UserDao {
     public Page<User> getUserList();
 
     public List<User> testDate(User user);
+
+    public String getMaxCode(@Param("codPre") String codPre);
 }

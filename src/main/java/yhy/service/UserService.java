@@ -36,4 +36,6 @@ public interface UserService {
     public PageInfo<User> getUserList(PageBean pageBean);
     public User testUser(Integer id);
     public List<User> testDate(User user);
+
+    public String getMaxCode(String codePre);
 }

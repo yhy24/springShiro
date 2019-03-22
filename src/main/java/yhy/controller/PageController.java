@@ -1,16 +1,16 @@
 package yhy.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import yhy.pojo.Department;
 import yhy.pojo.User;
 import yhy.service.UserService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,17 +62,25 @@ public class PageController {
         System.out.println("-----------save------" + (end - start));
         return String.valueOf(saveBatch);
     }
-    @RequestMapping("/saveOne")
+    @RequestMapping(value = "/saveOne",method = RequestMethod.POST)
     @ResponseBody
-    public String test() {
-        User user = new User();
+    public String test(@RequestBody User user) {
+        User user1 = user;
+        if (user1 != null) {
+            System.out.println("没有参数额!");
+        } else {
+            System.out.println(user.toString());
+        }
+
+        /*User user = new User();
         user.setPhone("9659999");
         user.setAge(20);
         user.setEmail("hao@qq.com");
         user.setUsername("ying");
         user.setPassword("464655");
-        System.out.println("-----------one------");
+        System.out.println("-----------one------");*/
         int i = userService.insertOne(user);
+        System.out.println(user.getId()+"-------------");
         System.out.println("-----userId------"+user.getId());
         return "-------one-------";
     }
@@ -116,4 +124,25 @@ public class PageController {
         System.out.println("--------listS:-------" + departmentByIdStep.getUsers().toString());
         return departmentByIdStep.toString();
     }
+
+   /* public static void main(String[] args) {
+        User user = new User();
+        user.setPhone("9659999");
+        user.setAge(22);
+        user.setEmail("yan@qq.com");
+        user.setUsername("yan");
+        user.setPassword("1235");
+        user.setCode("123");
+        user.setDeptId(2);
+        user.setSexly("b");
+        user.setCreateDate(new Date());
+        user.setInterest("篮球");
+        user.setModifyDate(new Date());
+        user.setMark("test just");
+        Department department = new Department();
+        department.setDeptName("test");
+        user.setDepartment(department);
+        user.setId(16);
+        System.out.println(JSON.toJSONString(user));
+    }*/
 }

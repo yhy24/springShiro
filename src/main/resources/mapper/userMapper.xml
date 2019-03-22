@@ -38,8 +38,8 @@
     </insert>
 <!--useGeneratedKeys="true" keyProperty="id" 自动生成id并能够获取-->
     <insert id="insertOne" parameterType="yhy.pojo.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user_info (phone,age,email,username,password,dept_id) VALUES
-            (#{phone},#{age},#{email},#{username},#{password},#{deptId})
+        INSERT INTO user_info (phone,age,email,username,password,dept_id,mark,create_date,modify_date,code,gender,sexly) VALUES
+            (#{phone},#{age},#{email},#{username},#{password},#{deptId},#{mark},#{createDate},#{modifyDate},#{code},#{gender},#{sexly})
     </insert>
 
 
@@ -99,6 +99,10 @@
              and  deptId = #{deptId}
           </if>
       </where>
+    </select>
+    <select id="getMaxCode" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT MAX(interest) FROM user_info
+        WHERE interest like concat('%',#{codPre},'%')
     </select>
 
 

@@ -20,6 +20,15 @@ public class User implements Serializable{
     private Date modifyDate;
     private Date createDate;
     private String code;
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public String getCode() {
         return code;

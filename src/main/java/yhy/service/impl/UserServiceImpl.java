@@ -146,4 +146,9 @@ public class UserServiceImpl implements UserService {
         return userDao.testDate(user);
     }
 
+    @Override
+    public String getMaxCode(String codePre) {
+        return userDao.getMaxCode(codePre);
+    }
+
 }

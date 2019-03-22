@@ -294,6 +294,14 @@ public class ControllerUser {
         }
         return list.toString();
     }
+    @RequestMapping("/testMax/{codePre}")
+    @ResponseBody
+    public String testMax(@PathVariable("codePre") String codePre) {
+        System.out.println("入参----------"+codePre);
+        String maxCode = userService.getMaxCode(codePre);
+        System.out.println(maxCode);
+        return maxCode;
+    }
 
 
 
