@@ -37,4 +37,7 @@ public interface UserDao {
     public List<User> testDate(User user);
 
     public String getMaxCode(@Param("codPre") String codPre);
+
+    public List<User> selectUserByTime(User user);
+    public List<User> selectUserByTime1();
 }

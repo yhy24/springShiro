@@ -303,6 +303,16 @@ public class ControllerUser {
         return maxCode;
     }
 
+    @RequestMapping("/testTime")
+    public String getSelect(){
+        List<User> list = userService.selectUserByTime1();
+        System.out.println("----time------"+list.size());
+        return JSON.toJSONString(list);
+    }
+
+
+
+
 
 
 }

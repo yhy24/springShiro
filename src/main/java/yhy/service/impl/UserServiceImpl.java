@@ -151,4 +151,9 @@ public class UserServiceImpl implements UserService {
         return userDao.getMaxCode(codePre);
     }
 
+    @Override
+    public List<User> selectUserByTime1() {
+        return userDao.selectUserByTime1();
+    }
+
 }

@@ -105,5 +105,12 @@
         WHERE interest like concat('%',#{codPre},'%')
     </select>
 
+    <select id="selectUserByTime" resultType="yhy.pojo.User" parameterType="yhy.pojo.User">
+
+    </select>
+    <select id="selectUserByTime1" resultType="yhy.pojo.User">
+        SELECT * from user_info WHERE create_date BETWEEN current_date()-7 AND sysdate()
+    </select>
+
 
 </mapper>

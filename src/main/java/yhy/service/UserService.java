@@ -38,4 +38,5 @@ public interface UserService {
     public List<User> testDate(User user);
 
     public String getMaxCode(String codePre);
+    public List<User> selectUserByTime1();
 }

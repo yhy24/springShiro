@@ -82,4 +82,67 @@ public class CheckController {
     public String test() {
         return null;
     }
+    /*public static String markImageByIconType(String codeType, String provCode, String imgStr, Integer degree ,String picExt, int width, int height) {
+        String  imgString=null;
+        String iconPath = null;
+        try {
+            Image srcImg = ImageIO.read(IOUtils.toInputStream(imgStr, "ISO8859-1"));
+            BufferedImage buffImg = new BufferedImage(srcImg.getWidth(null),
+                    srcImg.getHeight(null), BufferedImage.TYPE_INT_RGB);
+
+            // 1、得到画笔对象
+            Graphics2D g = buffImg.createGraphics();
+
+            // 2、设置对线段的锯齿状边缘处理
+            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g.drawImage(srcImg.getScaledInstance(srcImg.getWidth(null), srcImg.getHeight(null), Image.SCALE_SMOOTH), 0, 0, null);
+            // 3、设置水印旋转
+            if (null != degree) {
+                g.rotate(Math.toRadians(degree),(double) buffImg.getWidth() / 2, (double) buffImg.getHeight() / 2);
+            }
+            //获取水印路径
+            iconPath = BsStaticDataUtil.getCodeValue(codeType, provCode,"JVM");
+            if(iconPath==null||iconPath.trim().length()==0){
+                iconPath = BsStaticDataUtil.getCodeValue(codeType, "COMMON","JVM");
+            }
+            // 4、水印图片的路径 水印图片一般为gif或者png的，这样可设置透明度
+            ImageIcon imgIcon = new ImageIcon(iconPath);
+
+            // 5、得到Image对象。
+            Image img = imgIcon.getImage();
+
+            //g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,alpha));
+
+            // 6、水印图片的位置
+            g.drawImage(img, width, height, null);
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
+            // 7、释放资源
+            g.dispose();
+
+            //8、将BufferedImage对象buffImg转换为字符串
+            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+            ImageOutputStream imOut = ImageIO.createImageOutputStream(bs);
+            ImageIO.write(buffImg, picExt ,imOut);
+            InputStream is= new ByteArrayInputStream(bs.toByteArray());
+            imgString = IOUtils.toString(is, "ISO8859-1");
+            if (null != is) {
+                is.close();
+            }
+            if (null != imOut) {
+                imOut.close();
+            }
+
+            if (null != bs) {
+                bs.close();
+            }
+        } catch (IOException e) {
+
+            log.error("",e);
+        } catch (Exception e) {
+
+            log.error("",e);
+        }
+        return imgString;
+    }*/
+
 }
