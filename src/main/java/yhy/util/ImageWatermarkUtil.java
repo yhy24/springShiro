@@ -12,7 +12,7 @@ import java.io.OutputStream;
  * 
  * @Title ImageWatermarkUtil
  * @Description
- * @author 
+ * @author  testWaterMark
  */
 public class ImageWatermarkUtil {
     // 水印透明度
