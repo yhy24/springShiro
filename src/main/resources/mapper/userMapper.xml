@@ -75,7 +75,7 @@
         </foreach>
     </delete>
     <insert id="insertInto" parameterType="yhy.pojo.User">
-      INSERT INTO user_info (phone,age,email,user+name,password,dept_id) VALUES
+      INSERT INTO user_info (phone,age,email,username,password,dept_id) VALUES
         <foreach collection="list" item="user" index="index" open="(" separator="," close=")">
             #{user.phone},
             #{user.age},
