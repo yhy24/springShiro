@@ -60,7 +60,7 @@
     <select id="usersTest" resultType="yhy.pojo.User" parameterType="java.util.List">
         SELECT * from user_info WHERE id in
         <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
-            id=#{id}
+            #{id}
         </foreach>
     </select>
 
