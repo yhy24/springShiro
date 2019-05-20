@@ -42,6 +42,7 @@ public class DataFilter implements Filter {
             System.out.println(requestBody2);
 //            chain.doFilter(wapperRequest, response);
             chain.doFilter(request, response);
+//            生如夏花之绚烂，死如秋叶之静美
         //TODO对返回的数据进行处理或者加密使用
 //org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported
         } else {
