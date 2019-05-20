@@ -32,6 +32,7 @@ public class DataFilter implements Filter {
         Map<String,String[]> parameterMap = ((HttpServletRequest) request).getParameterMap();
 //        System.out.println(parameterMap******);
 //        ((HttpServletRequest) request).getParameterMap();
+//        拦截器是的使用
         if (checkUrl(url)) {
 //            WrapperRequest wrapperRequest = new WrapperRequest((HttpServletRequest) request);
 //            wrapper.setParater("username", new String[]{"ldp"});
