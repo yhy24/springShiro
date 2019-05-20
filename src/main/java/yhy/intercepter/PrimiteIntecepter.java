@@ -8,6 +8,7 @@ import yhy.pojo.User;
 import yhy.service.UserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,7 +31,13 @@ public class PrimiteIntecepter extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         String url = urlPathHelper.getLookupPathForRequest(request);
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            System.out.println("******"+cookie);
+        }
+
       /*  HttpSession session = request.getSession(false);
         User user= (User) session.getAttribute("userInfo");
         if (user == null) {
