@@ -156,4 +156,14 @@ public class PageController {
         System.out.println("--------listS:-***********------" + departmentByIdStep.getUsers().toString());
         return departmentByIdStep.toString();
     }
+
+    @RequestMapping("/select66")
+    @ResponseBody
+    public String youop() {
+        Department departmentByIdPlus = userService.getDepartmentByIdPlus(2);
+        System.out.println("-----user:----********----"+departmentByIdPlus.toString());
+        System.out.println("--------step:----%%%%%%%%%%---" + departmentByIdPlus.getUsers().toString());
+        return departmentByIdPlus.toString();
+    }
+
 }
