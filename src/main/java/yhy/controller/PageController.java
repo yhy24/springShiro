@@ -145,4 +145,15 @@ public class PageController {
         user.setId(16);
         System.out.println(JSON.toJSONString(user));
     }*/
+
+
+    /*通过部门分布查询用户*/
+    @RequestMapping("/test7")
+    @ResponseBody
+    public String test7() {
+        Department departmentByIdStep = userService.getDepartmentByIdStep(2);
+        System.out.println("-----departmentByIdPlus:--------"+departmentByIdStep.toString());
+        System.out.println("--------listS:-***********------" + departmentByIdStep.getUsers().toString());
+        return departmentByIdStep.toString();
+    }
 }
