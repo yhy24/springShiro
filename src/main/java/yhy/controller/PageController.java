@@ -145,4 +145,14 @@ public class PageController {
         user.setId(16);
         System.out.println(JSON.toJSONString(user));
     }*/
+
+    @RequestMapping("/select66")
+    @ResponseBody
+    public String youop() {
+        Department departmentByIdPlus = userService.getDepartmentByIdPlus(2);
+        System.out.println("-----user:----********----"+departmentByIdPlus.toString());
+        System.out.println("--------step:----%%%%%%%%%%---" + departmentByIdPlus.getUsers().toString());
+        return departmentByIdPlus.toString();
+    }
+
 }
