@@ -310,7 +310,17 @@ public class ControllerUser {
         return JSON.toJSONString(list);
     }
 
-
+    @RequestMapping("/info123")
+    @ResponseBody
+    public String userInfo1(){
+        PageHelper.startPage(1, 5);
+        List<User> list = userService.getUsers();
+        /*控制台查看数据*/
+        for(User user :list){
+            System.out.println("************"+user.toString());
+        }
+        return list.toString();
+    }
 
 
 
