@@ -29,7 +29,7 @@ public class DataFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String url = urlPathHelper.getLookupPathForRequest((HttpServletRequest) request);
 //        String method = ((HttpServletRequest) request).getMethod();
-        Map<String,String[]> parameterMap = ((HttpServletRequest) request).getParameterMap();
+//        Map<String,String[]> parameterMap = ((HttpServletRequest) request).getParameterMap();
 //        System.out.println(parameterMap******);
 //        ((HttpServletRequest) request).getParameterMap();
 //        拦截器是的使用

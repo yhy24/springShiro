@@ -32,6 +32,7 @@
             <mvc:exclude-mapping path="/testUser/**"/>  <!--排除不需要的拦截-->
             <mvc:exclude-mapping path="/login"/>
             <mvc:exclude-mapping path="/success"/>
+            <mvc:exclude-mapping path="/testAfter"/>
             <bean id="HandlerIntercepter" class="yhy.intercepter.PrimiteIntecepter"/>
         </mvc:interceptor>
     </mvc:interceptors>

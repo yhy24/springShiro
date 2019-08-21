@@ -12,9 +12,12 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import yhy.exception.ServiceException;
 import yhy.pojo.Department;
 import yhy.pojo.PageBean;
@@ -29,10 +32,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class ControllerUser {
@@ -40,8 +45,16 @@ public class ControllerUser {
 
     @Resource
     UserService userService;
-@Autowired
+    @Autowired
     HttpServletRequest request;
+   @Autowired
+   HttpServletResponse response;
+
+   @Autowired
+    BeanFactory beanFactory;
+
+
+
 
     private Subject subject=null;
 
@@ -309,17 +322,52 @@ public class ControllerUser {
         System.out.println("----time------"+list.size());
         return JSON.toJSONString(list);
     }
+    @RequestMapping("/testAfter")
+    @ResponseBody
+    public String testAfter(){
+        List<User> list = userService.selectUserByTime1();
+        System.out.println("----time------"+list.size());
+        int k = 10 / 0;
+        return JSON.toJSONString(list);
+    }
 
     @RequestMapping("/info123")
     @ResponseBody
-    public String userInfo1(){
-        PageHelper.startPage(1, 5);
-        List<User> list = userService.getUsers();
-        /*控制台查看数据*/
-        for(User user :list){
-            System.out.println("************"+user.toString());
+    public String userInfo2() throws ServiceException {
+        String name = "科比";
+        User user = new User();
+//                User user = userService.findUserByName(name);
+        Class aClass = userService.getClass();
+        try {
+//            Method findUserByName = userService.getClass().getMethod("findUserByName",new Class[]{String.class});
+//            user = (User)findUserByName.invoke(userService, name);
+            UserService bean = (UserService)beanFactory.getBean(aClass);
+            user= bean.findUserByName(name);
+            System.out.println(user.toString()+"*******");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return list.toString();
+        return user.toString();
+    }
+
+    @RequestMapping("/info12")
+    @ResponseBody
+    public String userInfo1(RedirectAttributes attributes) throws ServiceException {
+        response.setHeader("Access-Control-Allow-Origin","http://localhost:8080");
+        response.setHeader("Access-Control-Allow-Methods","POST,GET" );
+        response.setHeader("sessionID", "689769");
+        response.addHeader("sessionID", "46789797");
+        response.addDateHeader("sessionID", 5895648);
+        attributes.addAttribute("sessionID", "se465465");
+//        attributes.addFlashAttribute("sessionId", "geagerre");
+        try {
+            UUID uuid = UUID.randomUUID();
+            String string = uuid.toString();
+            response.sendRedirect("http://192.168.26.202:30011/iscportal/monitor.html?token="+string);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "重定向成功!";
     }
 
 

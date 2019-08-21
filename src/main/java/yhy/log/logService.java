@@ -1,6 +1,7 @@
 package yhy.log;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,7 +21,7 @@ public class logService {
      * 定义一个方法，用来声明切入点的表达式，一般的，改方法中不再需要写入其他的代码
      * 后面的其他的方法直接饮用方法名来引用当前的切点表达式即可（如下方法演示:testPCut()）
      */
-    @Pointcut("execution(* yhy.service..*(..))")
+    @Pointcut("execution(* yhy.controller..*(..))")
     public void testPoint() {
     }
 
@@ -36,9 +37,36 @@ public class logService {
     }
 
     @After("testPoint()")
-    public void testPCut() {
-        System.out.println("<-------123-------->");
+    public void testPCut(JoinPoint joinPoint) {
+        String string = joinPoint.getSignature().toString();
+        System.out.println("<-------增强的after-无论异常和正常------->"+string);
     }
+
+    @AfterReturning("testPoint()")
+    public void testAfterRreturn() {
+        System.out.println("只有正常的正常返回的after");
+    }
+
+    @AfterThrowing("testPoint()")
+    public void testThrowbal() {
+        System.out.println("AfterThrowing--------------");
+    }
+
+
+ /*   @Around("testPoint()")
+    public void testDoAround(ProceedingJoinPoint joinPoint){
+        String str = "test";//环绕执行
+        System.out.println("执行方法前"+str);
+        long start = System.currentTimeMillis();
+        try {
+            joinPoint.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        String string = joinPoint.getSignature().toLongString();
+        System.out.println("方法执行后的处理"+""+string+(System.currentTimeMillis()-start));
+
+    }*/
 
 
 

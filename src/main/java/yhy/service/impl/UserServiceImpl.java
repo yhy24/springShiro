@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import yhy.dao.DepartmentMapper;
 import yhy.dao.PageDao;
 import yhy.dao.UserDao;
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
-
+@Transactional()
     @Override
     public PageInfo<User> findUserByPage(int page,int size) {
         PageHelper.startPage(page, size);

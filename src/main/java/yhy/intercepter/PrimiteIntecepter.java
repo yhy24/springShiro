@@ -33,10 +33,10 @@ public class PrimiteIntecepter extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         String url = urlPathHelper.getLookupPathForRequest(request);
-        Cookie[] cookies = request.getCookies();
+       /* Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             System.out.println("******"+cookie);
-        }
+        }*/
 
       /*  HttpSession session = request.getSession(false);
         User user= (User) session.getAttribute("userInfo");

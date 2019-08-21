@@ -55,9 +55,9 @@
         <property name="unauthorizedUrl" value="/jsp/nuauthorized.jsp"></property>
         <property name="filterChainDefinitions">
             <value>
-                /jsp/login.jsp=anon
+                /jsp/login.jsp = anon
                 <!--/jsp/nuauthorized.jsp=anon-->
-                /jsp/**=authc
+                /jsp/** = authc
             </value>
         </property>
 

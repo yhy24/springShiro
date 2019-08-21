@@ -3,6 +3,7 @@ package yhy.service.impl;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.Realm;
@@ -13,6 +14,7 @@ import yhy.pojo.User;
 import yhy.service.UserService;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 public class UserShiro extends AuthorizingRealm implements Realm{
     private static Logger logger = Logger.getLogger(UserShiro.class);
@@ -22,12 +24,22 @@ public class UserShiro extends AuthorizingRealm implements Realm{
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        String name = (String) principalCollection.getPrimaryPrincipal();
+        Set<String> roles = null;
+        try {
+            User user = loninUser(name);
+//            Set<Stirng> roles = user.getRoles();
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+//        权限认证
+        return new SimpleAuthorizationInfo(roles);
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken){
-
+//登录认证
         UsernamePasswordToken upToken = (UsernamePasswordToken) authenticationToken;
         String name= upToken.getUsername();
         User user = null;
@@ -41,10 +53,10 @@ public class UserShiro extends AuthorizingRealm implements Realm{
         if (!pwd.equals(user.getPassword())){
             return null;
         }
-        Object principals = upToken.getPrincipal();
+        Object principals = name;
         String realName = getName();
         ByteSource salt = ByteSource.Util.bytes(name);
-        Object credentials = pwd;
+        Object credentials = upToken.getPassword();
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(principals,credentials,realName);
         // MD5加密 使用这个 SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(principals,credentials,salt,realName);
         return info;
