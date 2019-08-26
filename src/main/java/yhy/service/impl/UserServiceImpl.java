@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
      */
 //    @Transactional(propagation = Propagation.REQUIRES_NEW,isolation = Isolation.READ_COMMITTED,readOnly = false,timeout = 1)
     @Override
+    @Transactional()
     public User findUserByName(String username) throws ServiceException {
         User user = userDao.findOneUser(username);
         if(user == null){

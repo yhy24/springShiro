@@ -68,6 +68,25 @@ public class logService {
 
     }*/
 
+/*    *//**
+     * @annotation
+     *//*
+ @Pointcut("@annotation(yhy.aop.SwaggerAop)")
+ public void testAop() {
+
+ }
+
+    *//**
+     *
+     * @param joinPoint
+     * @return
+     *//*
+ @Around("testAop()")
+ public Object testAnnotation(ProceedingJoinPoint joinPoint) {
+
+     return new Object();
+ }*/
+
 
 
 }

@@ -28,7 +28,7 @@ public class ExcelUtil {
         HSSFRow hssfRow = hssfSheet.createRow(0);
 //        创建单元格，并设置表格的，并要求居中
         HSSFCellStyle style = hwb.createCellStyle();
-        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+//        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 //       声明列单元格对象
         HSSFCell hssfCell = null;
 //        创建每列的标题

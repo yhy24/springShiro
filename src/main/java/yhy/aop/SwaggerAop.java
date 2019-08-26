@@ -1,4 +1,4 @@
-package yhy.log;
+package yhy.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,11 +7,10 @@ import java.lang.annotation.Target;
 
 /**
  * @Author: yhy
- * @Date: 2019/8/21 9:35
+ * @Date: 2019/8/26 14:23
  * @Version 1.0
  */
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
-public @interface MyAnn {
-    String method() default "";
+public @interface SwaggerAop {
 }
