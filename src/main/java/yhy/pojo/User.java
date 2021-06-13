@@ -21,6 +21,7 @@ public class User implements Serializable{
     private Date createDate;
     private String code;
     private String gender;
+    private String view;
 
     public String getGender() {
         return gender;
@@ -195,5 +196,13 @@ public class User implements Serializable{
                 ", lists=" + lists +
                 ", department=" + department +
                 '}';
+    }
+
+    public String getView() {
+        return view;
+    }
+
+    public void setView(String view) {
+        this.view = view;
     }
 }
